@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaksis', function (Blueprint $table) {
+        Schema::create('transaksi', function (Blueprint $table) {
             $table->string('kode_transaksi',6)->unique()->primary();
             $table->date('tanggal_transaksi');
             $table->string('kode_pelanggan',6);
