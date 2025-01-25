@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class BarangController extends Controller
+class KasirController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('barang.index');
+        return view('kasir.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('barang.create');
+        //
     }
 
     /**
@@ -47,8 +47,8 @@ class BarangController extends Controller
      */
     public function edit(string $id)
     {
-        $barang = DB::table('barang')->where('id', $id)->first();
-        return view('barang.edit', compact('barang'));
+        $kasir = DB::table('kasir')->where('id', $id)->first();
+        return view('kasir.edit', compact('kasir'));
     }
 
     /**
@@ -57,19 +57,21 @@ class BarangController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_barang' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
+            'nama_kasir' => 'required',
+            'shift_mulai' => 'required',
+            'shift_selesai' => 'required',
+            'nohp' => 'required',
         ]);
 
         $data = [
-            'nama_barang' => $request->nama_barang,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
+            'nama_kasir' => $request->nama_kasir,
+            'shift_mulai' => $request->shift_mulai,
+            'shift_selesai' => $request->shift_selesai,
+            'nohp' => $request->nohp,
         ];
 
-        DB::table('barang')->where('kode_barang', $id)->update($data);
-        return redirect()->view('barang.index');
+        DB::table('kasir')->where('id', $id)->update($data);
+        return redirect()->view('kasir.index');
     }
 
     /**
@@ -77,7 +79,7 @@ class BarangController extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('barang')->where('kode_barang', $id)->delete();
-        return redirect()->view('barang.index');
+        DB::table('kasir')->where('kode_kasir', $id)->delete();
+        return redirect()->view('kasir.index');
     }
 }

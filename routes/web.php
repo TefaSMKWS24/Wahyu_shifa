@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KasirController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PelangganController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('barang', BarangController::class);
+Route::resource('kasir', KasirController::class);
+Route::resource('transaksi', TransaksiController::class);
+Route::resource('pelanggan', PelangganController::class);

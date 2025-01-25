@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+
 class PelangganController extends Controller
 {
     /**
@@ -19,7 +23,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        //
+        return view('pelanggan.create');
     }
 
     /**
@@ -43,7 +47,8 @@ class PelangganController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        DB::table('pelanggan')->where('kode_pelanggan', $id)->delete();
+        return redirect()->view('pelanggan.index');
     }
 
     /**
@@ -51,7 +56,17 @@ class PelangganController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'kode_pelanggan' => 'required',
+            'nama_pelanggan' => 'required',
+            'nohp' => 'required',
+        ]);
+
+        $data = [
+            'kode_pelanggan' => $request->kode_pelanggan,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'nohp' => $request->nohp,
+        ];
     }
 
     /**
@@ -59,6 +74,7 @@ class PelangganController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('pelanggan')->where('kode_pelanggan', $id)->delete();
+        return redirect()->view('pelanggan.index');
     }
 }
