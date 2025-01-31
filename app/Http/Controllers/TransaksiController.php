@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+
 class TransaksiController extends Controller
 {
     /**
@@ -37,6 +36,7 @@ class TransaksiController extends Controller
             'kode_barang' => 'required',
             'kode_pelanggan' => 'required',
             'total_belanja' => 'required',
+            'total' => 'required',
         ]);
 
         $datatransaksi = ([
@@ -47,8 +47,16 @@ class TransaksiController extends Controller
             'total_belanja' => $request->total_belanja,
         ]);
 
-        DB::table('transaksi')->insert($datatransaksi);
-        return redirect()->view('transaksi.index');
+        $datadetail = [
+            'kode_transaksi' => $request->kode_transaksi,
+            'kode_barang' => $request->kode_barang,
+            'jumlah' => $request->jumlah,
+            'total' => $request->total,
+        ];
+
+        DB::table('transaksi')->insert($data);
+        DB::table('detail_transaksi')->insert($data);
+        return redirect()->view('transaksi.index')->with('success', 'Data berhasil disimpan');
     }
 
     /**
