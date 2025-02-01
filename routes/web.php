@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\TransaksiController;
@@ -21,7 +25,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('barang', BarangController::class);
-Route::resource('kasir', KasirController::class);
-Route::resource('transaksi', TransaksiController::class);
-Route::resource('pelanggan', PelangganController::class);
+//GUEST (SEBELUM LOGIN)
+Route::middleware(['guest:kasir'])->group(function () {
+    Route::get('/kasir', function() { return view('auth.loginkasir');})->name('loginkasir');
+    Route::post('/loginkasir', [AuthController::class, 'loginkasir']);
+});
+Route::middleware(['guest:aadmin'])->group(function () {
+    Route::get('/admin', function() { return view('auth.loginadmin');})->name('loginadmin');
+    Route::post('/loginadmin', [AuthController::class, 'loginadmin']);
+});
+
+//AUTH (SETELAH LOGIN)
+Route::middleware(['auth:kasir'])->group(function () {
+    Route::get('/kasir/dashboard', [DashboardKasirController::class, 'dashboard']);
+    Route::get('/kasir/logout', [AuthController::class, 'logoutkasir']);
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardAdminController::class, 'dashboard']);
+    Route::get('/admin/logout', [AuthController::class, 'logoutadmin']);
+
+    Route::resource('barang', BarangController::class);
+    Route::resource('kasir', KasirController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('pelanggan', PelangganController::class);
+});
