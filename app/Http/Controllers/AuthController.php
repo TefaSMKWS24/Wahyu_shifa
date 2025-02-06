@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function loginkasir(Request $request)
     {
         if(Auth::guard('kasir')->attempt([
-            'nik' => $request->nis,
+            'kode_kasir' => $request->nis,
             'password' => $request->password
         ]))
         {
