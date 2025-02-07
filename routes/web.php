@@ -45,8 +45,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'dashboard']);
     Route::get('/admin/logout', [AuthController::class, 'logoutadmin']);
 
-    Route::resource('barang', BarangController::class);
-    Route::resource('kasir', KasirController::class);
-    Route::resource('transaksi', TransaksiController::class);
-    Route::resource('pelanggan', PelangganController::class);
+    //Route::resource('barang', BarangController::class);
+    //Route::resource('kasir', KasirController::class);
+    //Route::resource('transaksi', TransaksiController::class);
+    //Route::resource('pelanggan', PelangganController::class);
 });
