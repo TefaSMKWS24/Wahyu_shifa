@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 
@@ -10,9 +11,8 @@ class AuthController extends Controller
     public function loginkasir(Request $request)
     {
         if(Auth::guard('kasir')->attempt([
-            'kode_kasir' => $request->nis,
-            'password' => $request->password
-        ]))
+                                'kode_kasir' => $request->kode-kasir,
+                                'password' => $request->password]))
         {
             dd('Berhasil: '.Auth::guard('kasir')->user());
             Log::info('Login successful');
@@ -36,9 +36,8 @@ class AuthController extends Controller
     public function loginadmin(Request $request)
     {
         if(Auth::guard('admin')->attempt([
-            'nik' => $request->nis,
-            'password' => $request->password
-        ]))
+                                'email' => $request->email,
+                                'password' => $request->password]))
         {
             dd('Berhasil: '.Auth::guard('admin')->user());
             Log::info('Login successful');
