@@ -76,7 +76,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'kasir' => [
+        'kasirs' => [
             'driver' => 'eloquent',
             'model' => App\Models\kasir::class,
         ],
