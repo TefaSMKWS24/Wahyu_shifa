@@ -9,8 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class Kasir extends Authenticatable
+
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'kasir';
 
     /**
      * The attributes that are mass assignable.
@@ -42,16 +45,4 @@ class Kasir extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-}
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class kasir extends Model
-{
-    use HasFactory;
-
-    protected $table = 'kasir';
 }

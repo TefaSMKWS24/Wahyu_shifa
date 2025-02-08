@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function loginkasir(Request $request)
     {
         if(Auth::guard('kasir')->attempt([
-                                'kode_kasir' => $request->kode-kasir,
+                                'kode_kasir' => $request->kode_kasir,
                                 'password' => $request->password]))
         {
             dd('Berhasil: '.Auth::guard('kasir')->user());
