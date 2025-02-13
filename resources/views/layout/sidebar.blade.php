@@ -6,6 +6,7 @@
         <!--begin::Brand Image-->
         <img
           src="../../dist/assets/img/AdminLTELogo.png"
+          src="{{ asset('assets/img/AdminLTELogo.png') }}"
           alt="AdminLTE Logo"
           class="brand-image opacity-75 shadow"
         />
