@@ -27,5 +27,8 @@ class BarangSeeder extends Seeder
             'stok' => 15,
         ],
     ];
+
+    DB::table('barang')->insert($data);
+
     }
 }
